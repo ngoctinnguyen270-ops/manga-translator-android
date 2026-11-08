@@ -614,6 +614,7 @@ Grupo de comunicação e feedback: %2$s</string>
     <string name="language_english">Inglês</string>
     <string name="language_russian">Russo</string>
     <string name="language_portuguese_brazil">Português (Brasil)</string>
+    <string name="language_vietnamese">Vietnamita</string>
     <string name="floating_region_full_screen">Tela inteira</string>
     <string name="floating_region_margin_value">%1$s: %2$d</string>
     <string name="floating_region_configuration_note">Arraste para selecionar e toque em Confirmar. Vale para a próxima tradução. É possível refazer; largura e altura devem ocupar ao menos 10% da tela.</string>
@@ -684,4 +685,16 @@ Grupo de comunicação e feedback: %2$s</string>
     <string name="model_context_save_failed">Não foi possível salvar ou a configuração do modelo mudou. Reabra a janela e tente novamente.</string>
     <string name="model_context_missing_identity">Preencha primeiro o nome do modelo e o endereço da API.</string>
     <string name="llm_param_max_output_tokens">Limite de saída por solicitação (tokens)</string>
+    <string name="translation_engine_button">Mecanismo de tradução</string>
+    <string name="translation_engine_format">Mecanismo de tradução: %1$s</string>
+    <string name="translation_engine_title">Mecanismo de tradução</string>
+    <string name="translation_engine_ai_api">Serviço de IA (chave de API)</string>
+    <string name="translation_engine_google_offline">Google Tradutor offline (grátis)</string>
+    <string name="translation_engine_google_cloud">Google Cloud Translation (chave de API)</string>
+    <string name="translation_engine_ai_api_description">Usa o serviço de IA configurado abaixo. Melhor compreensão de contexto e nomes e formas de tratamento mais consistentes. O custo depende do provedor.</string>
+    <string name="translation_engine_google_offline_description">Grátis, sem chave. Usa os modelos no dispositivo do Google ML Kit, os mesmos do modo offline do Google Tradutor. O pacote de idioma (dezenas de MB) é baixado uma vez no primeiro uso; depois a tradução funciona sem internet. A qualidade é inferior à da tradução online.</string>
+    <string name="translation_engine_google_cloud_description">Mesma qualidade do Google Tradutor online. Requer um projeto do Google Cloud com a Cloud Translation API ativada e uma chave de API. Os primeiros 500.000 caracteres de cada mês são gratuitos; o faturamento precisa estar ativado no projeto.</string>
+    <string name="google_cloud_api_key_hint">Chave de API do Google Cloud</string>
+    <string name="google_cloud_api_key_missing">Informe uma chave de API do Google Cloud, senão a tradução não será iniciada.</string>
+    <string name="translation_engine_google_limits_note">Os mecanismos do Google traduzem cada balão separadamente: sem extração de glossário, resumo da trama ou estilo de tradução. Use o modo de tradução Padrão. A tradução VL direta e o OCR por IA ainda exigem um serviço de IA. O OCR local funciona com todos os mecanismos.</string>
 </resources>

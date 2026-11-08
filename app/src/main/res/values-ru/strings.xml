@@ -615,6 +615,7 @@
     <string name="language_english">Английский</string>
     <string name="language_russian">Русский</string>
     <string name="language_portuguese_brazil">Бразильский португальский</string>
+    <string name="language_vietnamese">Вьетнамский</string>
     <string name="floating_region_full_screen">Весь экран</string>
     <string name="floating_region_margin_value">%1$s: %2$d</string>
     <string name="floating_region_configuration_note">Выделите область движением пальца и нажмите «Подтвердить». Действует со следующего перевода. Можно выделить заново; ширина и высота — не менее 10% экрана.</string>
@@ -685,4 +686,16 @@
     <string name="model_context_save_failed">Не удалось сохранить, либо настройки модели изменились. Откройте окно заново и повторите попытку.</string>
     <string name="model_context_missing_identity">Сначала укажите название модели и адрес API.</string>
     <string name="llm_param_max_output_tokens">Лимит вывода на запрос (токены)</string>
+    <string name="translation_engine_button">Движок перевода</string>
+    <string name="translation_engine_format">Движок перевода: %1$s</string>
+    <string name="translation_engine_title">Движок перевода</string>
+    <string name="translation_engine_ai_api">ИИ-сервис (ключ API)</string>
+    <string name="translation_engine_google_offline">Google Переводчик офлайн (бесплатно)</string>
+    <string name="translation_engine_google_cloud">Google Cloud Translation (ключ API)</string>
+    <string name="translation_engine_ai_api_description">Использует ИИ-сервис, настроенный ниже. Лучше всего учитывает контекст, единообразно передаёт имена и обращения. Стоимость зависит от провайдера.</string>
+    <string name="translation_engine_google_offline_description">Бесплатно, ключ не нужен. Использует модели Google ML Kit на устройстве — те же, что в офлайн-режиме Google Переводчика. Языковой пакет (десятки МБ) загружается один раз при первом использовании, после чего перевод работает без интернета. Качество ниже, чем у онлайн-перевода.</string>
+    <string name="translation_engine_google_cloud_description">То же качество, что у онлайн-версии Google Переводчика. Нужен проект Google Cloud с включённым Cloud Translation API и ключ API. Первые 500 000 символов в месяц бесплатны; в проекте должна быть включена оплата.</string>
+    <string name="google_cloud_api_key_hint">Ключ API Google Cloud</string>
+    <string name="google_cloud_api_key_missing">Укажите ключ API Google Cloud, иначе перевод не запустится.</string>
+    <string name="translation_engine_google_limits_note">Движки Google переводят каждый пузырь отдельно: без извлечения глоссария, краткого содержания сюжета и стиля перевода. Используйте стандартный режим перевода. Прямой VL-перевод и ИИ-OCR по-прежнему требуют ИИ-сервиса. Локальный OCR работает с любым движком.</string>
 </resources>

@@ -70,6 +70,7 @@
     <string name="language_english">英语</string>
     <string name="language_russian">俄语</string>
     <string name="language_portuguese_brazil">巴西葡萄牙语</string>
+    <string name="language_vietnamese">越南语</string>
     <string name="reading_display_button">阅读设置</string>
     <string name="reading_display_title">阅读显示</string>
     <string name="reading_display_format">阅读显示：%1$s</string>
@@ -722,4 +723,16 @@
     <string name="model_context_save_failed">保存失败或当前模型配置已变化，请重新打开后重试。</string>
     <string name="model_context_missing_identity">请先填写模型名称和接口地址。</string>
     <string name="llm_param_max_output_tokens">单次请求输出上限（token）</string>
+    <string name="translation_engine_button">翻译引擎</string>
+    <string name="translation_engine_format">翻译引擎：%1$s</string>
+    <string name="translation_engine_title">翻译引擎</string>
+    <string name="translation_engine_ai_api">AI 服务（API 密钥）</string>
+    <string name="translation_engine_google_offline">Google 翻译离线版（免费）</string>
+    <string name="translation_engine_google_cloud">Google Cloud Translation（API 密钥）</string>
+    <string name="translation_engine_ai_api_description">使用下方配置的 AI 服务。上下文理解最好，人名与称呼最一致。费用取决于服务商。</string>
+    <string name="translation_engine_google_offline_description">免费，无需密钥。使用 Google ML Kit 端侧模型（与 Google 翻译离线模式相同）。首次使用时下载一次语言包（数十 MB），之后无需联网即可翻译。质量低于在线翻译。</string>
+    <string name="translation_engine_google_cloud_description">与 Google 翻译在线版质量相同。需要已启用 Cloud Translation API 的 Google Cloud 项目和 API 密钥。每月前 500,000 个字符免费；项目必须启用结算。</string>
+    <string name="google_cloud_api_key_hint">Google Cloud API 密钥</string>
+    <string name="google_cloud_api_key_missing">请填写 Google Cloud API 密钥，否则无法开始翻译。</string>
+    <string name="translation_engine_google_limits_note">Google 引擎逐个气泡翻译：不提取术语表、不生成剧情摘要、不应用翻译文风。请使用标准翻译模式。直接 VL 翻译与 AI OCR 仍需 AI 服务。本地 OCR 适用于所有引擎。</string>
 </resources>

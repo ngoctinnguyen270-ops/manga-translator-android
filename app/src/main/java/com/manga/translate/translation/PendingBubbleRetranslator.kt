@@ -60,7 +60,7 @@ internal class PendingBubbleRetranslator(
             AppLogger.log(logTag, "Refill skipped: missing OCR API settings")
             return@withContext null
         }
-        if (!settingsStore.load().isValid()) {
+        if (!settingsStore.isTextTranslationConfigured()) {
             AppLogger.log(logTag, "Refill skipped: missing translate API settings")
             throw LlmRequestException(
                 LlmErrorCode.MissingTranslateApiSettings,

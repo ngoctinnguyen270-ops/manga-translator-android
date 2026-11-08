@@ -34,4 +34,19 @@ class PromptAssetResolverTest {
             PromptAssetResolver.resolve(context, "prompts/llm_prompts.json")
         )
     }
+
+    @Test
+    fun `vietnamese uses its translation target and prompt variant`() {
+        val baseContext = ApplicationProvider.getApplicationContext<Context>()
+        val configuration = Configuration(baseContext.resources.configuration).apply {
+            setLocales(LocaleList(Locale.forLanguageTag("vi")))
+        }
+        val context = baseContext.createConfigurationContext(configuration)
+
+        assertEquals("vi", PromptAssetResolver.translationTargetKey(context))
+        assertEquals(
+            "prompts/llm_prompts_vi.json",
+            PromptAssetResolver.resolve(context, "prompts/llm_prompts.json")
+        )
+    }
 }

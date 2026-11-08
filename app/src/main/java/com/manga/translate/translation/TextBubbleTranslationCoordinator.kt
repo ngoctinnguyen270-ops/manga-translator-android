@@ -6,6 +6,8 @@ import com.manga.translate.network.LlmBubbleTranslationRequestItem
 import com.manga.translate.network.LlmErrorCode
 import com.manga.translate.network.LlmGateway
 import com.manga.translate.network.LlmResponseException
+import com.manga.translate.network.TranslationSourceLanguage
+import kotlinx.coroutines.withContext
 import com.manga.translate.ocr.normalizeOcrText
 import com.manga.translate.platform.AppLogger
 import com.manga.translate.settings.ApiSettings
@@ -59,15 +61,17 @@ internal class TextBubbleTranslationCoordinator(
                 sourceId = sourceIds[it.id] ?: "page"
             )
         }
-        val translated = llmClient.translateBubbleItems(
-            items = requestItems,
-            glossary = glossary,
-            promptAsset = promptAsset,
-            requestTimeoutMs = requestTimeoutMs,
-            retryCount = retryCount,
-            apiSettings = resolvedApiSettings,
-            glossaryProcessingEnabled = glossaryProcessingEnabled
-        ) ?: return null
+        val translated = withContext(TranslationSourceLanguage(language)) {
+            llmClient.translateBubbleItems(
+                items = requestItems,
+                glossary = glossary,
+                promptAsset = promptAsset,
+                requestTimeoutMs = requestTimeoutMs,
+                retryCount = retryCount,
+                apiSettings = resolvedApiSettings,
+                glossaryProcessingEnabled = glossaryProcessingEnabled
+            )
+        } ?: return null
 
         val translationById = LinkedHashMap<Int, String>(translated.items.size)
         val duplicateIds = LinkedHashSet<Int>()

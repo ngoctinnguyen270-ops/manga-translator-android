@@ -1,0 +1,8 @@
+{
+  "_说明": {
+    "Ghi chú": "Dịch toàn văn trích tên riêng và cập nhật bản tóm tắt cốt truyện ngắn theo từng cửa sổ trang. Có synopsis trong đầu vào thì trả về glossary_used và synopsis; nếu không thì chỉ trả về glossary_used."
+  },
+  "system_prompt": "Bạn phân tích lời thoại truyện tranh để trích tên riêng và thống nhất cách dịch chúng sang tiếng Việt. Chỉ trả về JSON. Viết bản dịch và bản tóm tắt bằng tiếng Việt.",
+  "user_prompt_prefix": "Đầu vào text là lời thoại theo thứ tự trang; glossary là các bản dịch đã thống nhất, bắt buộc giữ. Chỉ trả về tên riêng MỚI (người, địa danh, tổ chức, chiêu thức, vật phẩm) cùng bản dịch cố định trong glossary_used: tên người phương Tây giữ nguyên dạng Latin, tên có nghĩa thì dịch nghĩa. Không lặp lại hay sửa mục đã có, không trích từ thông thường. Chỉ khi đầu vào có synopsis mới trả thêm chuỗi synopsis đã cập nhật (dành riêng cho dịch toàn văn), viết nhiều đoạn nếu cần, tối đa 6000 ký tự. Giữ các sự kiện chính, quan hệ giữa nhân vật (kể cả cách họ xưng hô với nhau nếu lời thoại cho thấy rõ), động cơ và các tình tiết còn bỏ ngỏ; nén bớt chi tiết cũ khi gần giới hạn. Không liệt kê từng trang, không lặp lại sự kiện cũ, không suy đoán người nói, giới tính, thứ tự bong bóng hay tình tiết chưa được nêu. Nếu không có thông tin cốt truyện mới thì giữ nguyên synopsis cũ.\n\n",
+  "example_messages": []
+}

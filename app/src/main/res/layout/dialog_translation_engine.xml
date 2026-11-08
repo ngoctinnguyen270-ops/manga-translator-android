@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RadioGroup
+            android:id="@+id/translation_engine_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/translation_engine_ai_api"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/dialogTextColor"
+                android:text="@string/translation_engine_ai_api" />
+
+            <RadioButton
+                android:id="@+id/translation_engine_google_offline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/dialogTextColor"
+                android:text="@string/translation_engine_google_offline" />
+
+            <RadioButton
+                android:id="@+id/translation_engine_google_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/dialogTextColor"
+                android:text="@string/translation_engine_google_cloud" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/translation_engine_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:accessibilityLiveRegion="polite"
+            android:textAppearance="@style/Widget.MangaTranslator.BodyMuted" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/google_cloud_api_key_layout"
+            style="@style/Widget.MangaTranslator.Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/google_cloud_api_key_hint"
+            app:placeholderTextColor="?attr/dialogHintTextColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Widget.MangaTranslator.DialogEditText"
+                android:id="@+id/google_cloud_api_key_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/translation_engine_google_limits_note"
+            android:textAppearance="@style/Widget.MangaTranslator.BodyMuted" />
+    </LinearLayout>
+</ScrollView>

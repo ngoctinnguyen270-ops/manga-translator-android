@@ -41,8 +41,10 @@ class LlmClient(
     private val responseParser = ResponseParser()
     private val retryHandler = RetryHandler(settingsStore)
     private val ocrConcurrencyLimiter = DynamicConcurrencyLimiter()
+    private val googleEngine = GoogleTranslateEngine(appContext)
 
     override fun isConfigured(apiSettings: ApiSettings?): Boolean {
+        if (googleEngine.isActive()) return googleEngine.isReady()
         return (apiSettings ?: settingsStore.load()).isValid()
     }
 
@@ -82,6 +84,10 @@ class LlmClient(
         glossaryProcessingEnabled: Boolean
     ): LlmBubbleTranslationResult? =
         withContext(Dispatchers.IO) {
+            if (googleEngine.isActive()) {
+                if (!googleEngine.isReady()) return@withContext null
+                return@withContext googleEngine.translateItems(items, glossary)
+            }
             val settings = apiSettings ?: settingsStore.load()
             if (!settings.isValid()) return@withContext null
             if (items.isEmpty()) return@withContext LlmBubbleTranslationResult(emptyList(), emptyMap())
@@ -125,6 +131,16 @@ class LlmClient(
         promptAsset: String,
         onSuccess: suspend (Map<String, String>) -> Unit = {}
     ): Map<String, String>? = withContext(Dispatchers.IO) {
+        if (googleEngine.isActive()) {
+            // Google engines cannot extract names or summarize; mark pages done with the
+            // synopsis unchanged so full-text translation proceeds with text translation only.
+            val synopsis = currentCoroutineContext()[FullTranslationSynopsis]
+            if (synopsis != null) {
+                val pending = pages.map { it.sourceId }.filterNot { synopsis.isComplete(it) }
+                if (pending.isNotEmpty()) synopsis.commit(pending, "")
+            }
+            return@withContext emptyMap()
+        }
         val settings = settingsStore.load()
         if (!settings.isValid()) return@withContext null
         val names = LinkedHashMap(glossary)

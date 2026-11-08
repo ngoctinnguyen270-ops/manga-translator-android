@@ -42,7 +42,7 @@ internal class FolderPageTranslationExecutor(
         glossary: MutableMap<String, String>,
         glossaryMutex: Mutex
     ): PageTranslationExecutionResult {
-        if (!settingsStore.load().isValid()) {
+        if (!settingsStore.isTextTranslationConfigured()) {
             throw LlmRequestException(LlmErrorCode.MissingApiSettings, "No configured translation provider")
         }
         if (!force) {
@@ -118,7 +118,7 @@ internal class FolderPageTranslationExecutor(
         glossary: MutableMap<String, String>,
         glossaryMutex: Mutex
     ): PageTranslationExecutionResult {
-        if (!settingsStore.load().isValid()) {
+        if (!settingsStore.isTextTranslationConfigured()) {
             throw LlmRequestException(LlmErrorCode.MissingApiSettings, "No configured translation provider")
         }
         tryRefillPartial(

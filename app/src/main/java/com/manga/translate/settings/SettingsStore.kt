@@ -291,6 +291,20 @@ class SettingsStore(context: Context) {
 
     fun load(): ApiSettings = apiSettingsStore.load()
 
+    private val translationEngineStore = TranslationEngineStore(context)
+
+    /**
+     * Whether bubble text can be translated: the selected Google engine is ready, or, when
+     * the AI engine is selected, the AI provider is configured.
+     */
+    fun isTextTranslationConfigured(): Boolean {
+        return if (translationEngineStore.loadEngine().usesGoogle) {
+            translationEngineStore.isGoogleEngineReady()
+        } else {
+            load().isValid()
+        }
+    }
+
     fun save(settings: ApiSettings) {
         apiSettingsStore.save(settings)
     }
@@ -628,6 +642,8 @@ class SettingsStore(context: Context) {
             "请以普通日漫翻译风格翻译，语言自然流畅，符合中文漫画阅读习惯。"
         internal const val DEFAULT_TRANSLATION_STYLE_HANT =
             "請以普通日漫翻譯風格翻譯，語言自然流暢，符合中文漫畫閱讀習慣。"
+        internal const val DEFAULT_TRANSLATION_STYLE_VI =
+            "Dịch theo phong cách truyện tranh Việt hóa phổ biến: lời thoại tự nhiên, trôi chảy, đúng thói quen đọc của người Việt; xưng hô phù hợp quan hệ và tính cách nhân vật, giữ nhất quán suốt truyện."
         internal const val DEFAULT_API_URL = "https://api.siliconflow.cn/v1"
         internal const val DEFAULT_MODEL = "Qwen/Qwen3.5-35B-A3B"
         internal const val DEFAULT_OCR_API_URL = ""

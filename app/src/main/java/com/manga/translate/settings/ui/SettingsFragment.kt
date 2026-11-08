@@ -52,6 +52,9 @@ import com.manga.translate.settings.ui.dialogs.CustomRequestParamsDialog
 import com.manga.translate.settings.ui.dialogs.FloatingBubbleRenderSettingsDialog
 import com.manga.translate.settings.ui.dialogs.FloatingTranslateSettingsDialog
 import com.manga.translate.settings.ui.dialogs.LanguageDialog
+import com.manga.translate.settings.ui.dialogs.TranslationEngineDialog
+import com.manga.translate.settings.TranslationEngine
+import com.manga.translate.settings.TranslationEngineStore
 import com.manga.translate.settings.ui.dialogs.LinkSourceDialog
 import com.manga.translate.settings.ui.dialogs.LlmParamsDialog
 import com.manga.translate.settings.ui.dialogs.LogsDialog
@@ -366,6 +369,9 @@ class SettingsFragment : Fragment(), BackupOperationCancelHost, BackupExportOpti
         binding.languageButton.setOnClickListener {
             showLanguageDialog()
         }
+        binding.translationEngineButton.setOnClickListener {
+            TranslationEngineDialog(this, TranslationEngineStore(requireContext())).show()
+        }
         binding.readingDisplayButton.setOnClickListener {
             showReadingDisplayDialog()
         }
@@ -527,6 +533,10 @@ class SettingsFragment : Fragment(), BackupOperationCancelHost, BackupExportOpti
         updateLabeledButton(binding.languageButton, R.string.language_setting_format, language.labelRes)
     }
 
+    internal fun updateTranslationEngineButton(engine: TranslationEngine) {
+        updateLabeledButton(binding.translationEngineButton, R.string.translation_engine_format, engine.labelRes)
+    }
+
     internal fun updateReadingDisplayButton(mode: ReadingDisplayMode) {
         updateLabeledButton(binding.readingDisplayButton, R.string.reading_display_format, mode.labelRes)
     }
@@ -589,6 +599,7 @@ class SettingsFragment : Fragment(), BackupOperationCancelHost, BackupExportOpti
         binding.enableThinkingSwitch.isChecked = settingsStore.loadLlmParameters().enableThinking
         updateThinkingLengthButton()
         updateLanguageButton(settingsStore.loadAppLanguage())
+        updateTranslationEngineButton(TranslationEngineStore(requireContext()).loadEngine())
         updateThemeButton(settingsStore.loadThemeMode())
         updateReadingDisplayButton(settingsStore.loadReadingDisplayMode())
         updateReadingPageAnimationButton(settingsStore.loadReadingPageAnimationMode())

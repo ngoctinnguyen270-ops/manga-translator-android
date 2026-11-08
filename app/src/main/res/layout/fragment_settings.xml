@@ -42,6 +42,15 @@
                 android:text="@string/settings_group_api_title"
                 android:textAppearance="@style/Widget.MangaTranslator.CardTitle" />
 
+            <Button
+                android:id="@+id/translation_engine_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:text="@string/translation_engine_button" />
+
             <TextView
                 android:id="@+id/api_url_hint_text"
                 android:layout_width="match_parent"

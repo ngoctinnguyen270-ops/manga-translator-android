@@ -188,10 +188,12 @@ internal class AppSettingsStore(
     fun loadTranslationStyle(): String {
         val saved = storage.prefs.getString(SettingsStore.KEY_TRANSLATION_STYLE, null)
         if (!saved.isNullOrBlank()) return saved
-        return if (PromptAssetResolver.isTraditionalChinese(storage.appContext)) {
-            SettingsStore.DEFAULT_TRANSLATION_STYLE_HANT
-        } else {
-            SettingsStore.DEFAULT_TRANSLATION_STYLE
+        return when {
+            PromptAssetResolver.isTraditionalChinese(storage.appContext) ->
+                SettingsStore.DEFAULT_TRANSLATION_STYLE_HANT
+            PromptAssetResolver.translationTargetKey(storage.appContext) == "vi" ->
+                SettingsStore.DEFAULT_TRANSLATION_STYLE_VI
+            else -> SettingsStore.DEFAULT_TRANSLATION_STYLE
         }
     }
 

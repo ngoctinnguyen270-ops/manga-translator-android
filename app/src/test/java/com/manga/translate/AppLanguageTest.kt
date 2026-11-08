@@ -44,4 +44,10 @@ class AppLanguageTest {
         assertFalse(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("pt-PT")))
         assertFalse(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("fr-FR")))
     }
+
+    @Test
+    fun `supported language detection includes vietnamese`() {
+        assertTrue(AppLanguage.hasSupportedSystemLanguage(LocaleListCompat.forLanguageTags("vi-VN")))
+        assertEquals("vi", AppLanguage.VIETNAMESE.toLocales().toLanguageTags())
+    }
 }

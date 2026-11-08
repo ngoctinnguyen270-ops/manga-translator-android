@@ -614,6 +614,7 @@ Communication and feedback group: %2$s</string>
     <string name="language_english">English</string>
     <string name="language_russian">Russian</string>
     <string name="language_portuguese_brazil">Brazilian Portuguese</string>
+    <string name="language_vietnamese">Vietnamese</string>
     <string name="floating_region_full_screen">Full screen</string>
     <string name="floating_region_margin_value">%1$s: %2$d</string>
     <string name="floating_region_configuration_note">Drag to select, then tap Confirm. Applies to the next translation. You can redraw; width and height must each be at least 10% of the screen.</string>
@@ -684,4 +685,16 @@ Communication and feedback group: %2$s</string>
     <string name="model_context_save_failed">Could not save, or the model settings changed. Reopen this dialog and try again.</string>
     <string name="model_context_missing_identity">Enter a model name and endpoint first.</string>
     <string name="llm_param_max_output_tokens">Output limit per request (tokens)</string>
+    <string name="translation_engine_button">Translation Engine</string>
+    <string name="translation_engine_format">Translation engine: %1$s</string>
+    <string name="translation_engine_title">Translation Engine</string>
+    <string name="translation_engine_ai_api">AI service (API key)</string>
+    <string name="translation_engine_google_offline">Google Translate offline (free)</string>
+    <string name="translation_engine_google_cloud">Google Cloud Translation (API key)</string>
+    <string name="translation_engine_ai_api_description">Uses the AI service configured below. Best context awareness and consistent names and forms of address. Cost depends on your provider.</string>
+    <string name="translation_engine_google_offline_description">Free, no key needed. Uses Google ML Kit on-device models, the same models as the offline mode of Google Translate. The language pack (tens of MB) downloads once on first use; after that, translation works without internet. Quality is lower than online translation.</string>
+    <string name="translation_engine_google_cloud_description">Same quality as Google Translate online. Requires a Google Cloud project with the Cloud Translation API enabled and an API key. The first 500,000 characters each month are free; billing must be enabled on the project.</string>
+    <string name="google_cloud_api_key_hint">Google Cloud API key</string>
+    <string name="google_cloud_api_key_missing">Enter a Google Cloud API key, otherwise translation will not start.</string>
+    <string name="translation_engine_google_limits_note">Google engines translate each bubble on its own: no glossary extraction, plot synopsis or translation style. Use the Standard translation mode. Direct VL translation and AI OCR still need an AI service. Local OCR works with every engine.</string>
 </resources>

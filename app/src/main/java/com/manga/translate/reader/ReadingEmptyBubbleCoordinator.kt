@@ -68,7 +68,7 @@ internal class ReadingEmptyBubbleCoordinator(
     ): EmptyBubbleProcessOutcome? = withContext(Dispatchers.Default) {
         val targets = baseTranslation.bubbles.filter { it.needsTranslationRetry() }
         if (targets.isEmpty()) return@withContext null
-        if (!settingsStore.load().isValid()) {
+        if (!settingsStore.isTextTranslationConfigured()) {
             AppLogger.log("Reading", "Missing translate API settings for empty bubble translation")
             throw LlmRequestException(
                 LlmErrorCode.MissingTranslateApiSettings,
