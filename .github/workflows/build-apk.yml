@@ -39,12 +39,47 @@ jobs:
           curl -fL --retry 3 -o ocr/characters.json $litert/characters.json
           ls -la detection ocr
 
+      - name: Cache Gradle downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', '**/*.gradle.kts') }}
+          restore-keys: gradle-${{ runner.os }}-
+
+      - name: Pre-download Gradle distribution
+        # services.gradle.org sometimes answers HTTP 504; try several sources and verify the
+        # official SHA-256 from gradle-wrapper.properties before using any of them.
+        run: |
+          set -u
+          PROPS=gradle/wrapper/gradle-wrapper.properties
+          URL=$(grep '^distributionUrl=' $PROPS | cut -d= -f2- | sed 's#\\:#:#g')
+          NAME=$(basename "$URL")
+          SHA=$(grep '^distributionSha256Sum=' $PROPS | cut -d= -f2)
+          ZIP="$RUNNER_TEMP/$NAME"
+          ok=0
+          for attempt in 1 2 3 4 5; do
+            for src in "$URL" "https://downloads.gradle.org/distributions/$NAME" "https://mirrors.cloud.tencent.com/gradle/$NAME"; do
+              echo "Trying $src (round $attempt)"
+              if curl -fL --connect-timeout 20 --max-time 300 -o "$ZIP" "$src" && echo "$SHA  $ZIP" | sha256sum -c -; then
+                ok=1; break 2
+              fi
+            done
+            sleep 30
+          done
+          [ "$ok" = 1 ] || { echo "Could not download $NAME"; exit 1; }
+          sed -i "s#^distributionUrl=.*#distributionUrl=file:$ZIP#" $PROPS
+          grep distributionUrl $PROPS
+
       - name: Build debug APK
         run: |
           chmod +x gradlew
-          # Retry on transient network errors (HTTP 5xx while downloading Gradle or dependencies).
+          # Retry on transient network errors (HTTP 5xx while downloading dependencies).
           for i in 1 2 3; do
-            ./gradlew :app:assembleDebug --stacktrace && exit 0
+            ./gradlew :app:assembleDebug --stacktrace \
+              -Dorg.gradle.internal.repository.max.retries=8 \
+              -Dorg.gradle.internal.repository.initial.backoff=2000 && exit 0
             echo "Build failed (attempt $i), retrying in 60s..."; sleep 60
           done
           exit 1
