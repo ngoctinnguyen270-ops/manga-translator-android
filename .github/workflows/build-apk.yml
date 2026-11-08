@@ -19,13 +19,12 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install SDK platform and build tools
+            - name: Install SDK platform and build tools
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platforms;android-37" "build-tools;37.0.0" || true
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platforms;android-37" "build-tools;37.0.0" || true
 
       - name: Download third-party OCR models
         run: |
