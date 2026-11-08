@@ -42,7 +42,12 @@ jobs:
       - name: Build debug APK
         run: |
           chmod +x gradlew
-          ./gradlew :app:assembleDebug --stacktrace
+          # Retry on transient network errors (HTTP 5xx while downloading Gradle or dependencies).
+          for i in 1 2 3; do
+            ./gradlew :app:assembleDebug --stacktrace && exit 0
+            echo "Build failed (attempt $i), retrying in 60s..."; sleep 60
+          done
+          exit 1
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
