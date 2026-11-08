@@ -19,7 +19,7 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-            - name: Install SDK platform and build tools
+      - name: Install SDK platform and build tools
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
           SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
@@ -38,31 +38,6 @@ jobs:
           done
           curl -fL --retry 3 -o ocr/characters.json $litert/characters.json
           ls -la detection ocr
-
-      - name: Download Korean OCR model (optional)
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          cd assets/models
-          kr=https://huggingface.co/PaddlePaddle/korean_PP-OCRv5_mobile_rec_onnx/resolve/main
-          curl -fL --retry 3 -o ocr/korean_PP-OCRv5_mobile_rec.onnx $kr/inference.onnx
-          curl -fL --retry 3 -o /tmp/korean_inference.yml $kr/inference.yml
-          python3 - <<'EOF'
-          import re
-          text = open("/tmp/korean_inference.yml", encoding="utf-8").read()
-          block = text.split("character_dict:", 1)[1]
-          chars = []
-          for line in block.splitlines()[1:]:
-              m = re.match(r"^\s*-\s?(.*)$", line)
-              if not m:
-                  break
-              value = m.group(1)
-              if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
-                  value = value[1:-1]
-              chars.append(value)
-          open("ocr/korean_PP-OCRv5_mobile_rec_dict.txt", "w", encoding="utf-8").write("\n".join(chars) + "\n")
-          print("korean dict entries:", len(chars))
-          EOF
 
       - name: Build debug APK
         run: |
